@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>National Apology Mission</title>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LHVST18FX9"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LHVST18FX9');
+</script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{
+height:100vh;background:linear-gradient(135deg,#fff7fa,#ffffff);
+display:flex;justify-content:center;align-items:center;
+overflow:hidden;color:#444;padding:20px;
+}
+.screen{
+display:none;text-align:center;max-width:700px;width:100%;
+background:white;padding:35px;border-radius:25px;
+box-shadow:0 10px 35px rgba(0,0,0,.08);
+position:relative;z-index:10;
+}
+.active{display:block}
+h1,h2{color:#ff4d6d;margin-bottom:15px}
+p{line-height:1.8}
+.btn{
+margin-top:20px;padding:14px 28px;border:none;border-radius:40px;
+background:#ff4d6d;color:white;cursor:pointer
+}
+.barwrap{height:25px;background:#eee;border-radius:20px;overflow:hidden;margin:20px 0}
+.bar{height:100%;width:0;background:#ff4d6d}
+.heart{position:absolute;color:white;pointer-events:none;animation:f 6s linear infinite}
+.flower{position:absolute;pointer-events:none;animation:fall 5s linear forwards}
+@keyframes f{from{transform:translateY(100vh)}to{transform:translateY(-120px)}}
+@keyframes fall{from{transform:translateY(-100px)}to{transform:translateY(110vh) rotate(360deg)}}
+#line{min-height:120px;font-size:1.15rem;line-height:2}
+</style>
+</head>
+<body>
+
+<div id="s1" class="screen active">
+<h1>🚨 National Apology Mission</h1>
+<p>Government of India<br>Ministry of Unnecessary Overthinking</p><br>
+<p><b>Confidential Case File</b><br><br>Case No:<br>NOIDA ↔ JHARKHAND</p>
+<button class="btn" onclick="show(2)">Open Case File</button>
+</div>
+
+<div id="s2" class="screen">
+<h2>Investigation In Progress</h2>
+<div class="barwrap"><div id="bar" class="bar"></div></div>
+<p id="status">Checking chat history...</p>
+</div>
+
+<div id="s3" class="screen">
+<h2 id="chargeTitle">Charge #1</h2>
+<p id="chargeText"></p>
+<button class="btn" onclick="nextCharge()">Next</button>
+</div>
+
+<div id="s4" class="screen">
+<h2>⚖️ Court Hearing</h2>
+<p>The Court has reviewed all evidence.<br><br>
+The accused wishes to submit a personal statement.</p>
+<button class="btn" onclick="startApology()">Hear Statement</button>
+</div>
+
+<div id="s5" class="screen">
+<h2>🤍 Personal Statement</h2>
+<p id="line"></p>
+<button id="continueBtn" class="btn" style="display:none" onclick="showFinal()">Final Verdict</button>
+</div>
+
+<div id="s6" class="screen">
+<h2>🌸 Final Court Order 🌸</h2>
+<p>
+The accused shall:<br><br>
+Stop assuming things.<br>
+Stop overthinking.<br>
+Stop creating imaginary stories.<br><br>
+And remember that some people are carrying more than they show.
+<br><br>
+From Noida, with regret.<br><br>
+To one sweet and simple girl from Jharkhand,<br>
+with affection. 🤍
+<br><br>
+P.S.<br>
+The Ministry of Unnecessary Overthinking has been temporarily shut down.
+</p>
+</div>
+
+<audio id="music" loop>
+<source src="song1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function show(n){
+document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
+document.getElementById('s'+n).classList.add('active');
+if(n===2)startInvestigation();
+}
+
+const msgs=[
+"Checking chat history...",
+"Reviewing unnecessary assumptions...",
+"Analysing overthinking records...",
+"Measuring stupidity levels...",
+"Preparing final report..."
+];
+
+function startInvestigation(){
+let i=0,v=0;
+let t=setInterval(()=>{
+v++;
+document.getElementById('bar').style.width=v+'%';
+document.getElementById('status').innerText=msgs[Math.min(4,Math.floor(v/20))];
+if(v>=100){clearInterval(t);setTimeout(()=>show(3),700);}
+},40);
+}
+
+const charges=[
+"Being unnecessarily dramatic.",
+"Creating theories without sufficient evidence.",
+"Missing someone more than officially permitted.",
+"Accidentally hurting one sweet and simple girl from Jharkhand.",
+"Verdict: Guilty."
+];
+
+let c=0;
+function nextCharge(){
+c++;
+if(c>=charges.length){show(4);return;}
+document.getElementById('chargeTitle').innerText=c<4?"Charge #"+(c+1):"Verdict";
+document.getElementById('chargeText').innerText=charges[c];
+}
+document.getElementById('chargeText').innerText=charges[0];
+
+const apology=[
+"I know you've been busy.",
+"Maybe busier than I can fully understand.",
+"Office work.",
+"Household work.",
+"Life.",
+"And somewhere in all of that...",
+"I made things harder.",
+"For that, I'm genuinely sorry. 🤍"
+];
+
+function startApology(){
+show(5);
+document.getElementById('music').play().catch(()=>{});
+let i=0;
+const line=document.getElementById('line');
+line.innerHTML="";
+function add(){
+if(i<apology.length){
+line.innerHTML += apology[i] + "<br><br>";
+i++;
+setTimeout(add,2200);
+}else{
+document.getElementById('continueBtn').style.display='inline-block';
+}
+}
+add();
+}
+
+function showFinal(){
+show(6);
+setInterval(()=>{
+const f=document.createElement('div');
+f.className='flower';
+f.innerHTML=['🌸','🌷','🌹','💐'][Math.floor(Math.random()*4)];
+f.style.left=Math.random()*100+'vw';
+f.style.fontSize=(20+Math.random()*20)+'px';
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),5000);
+},150);
+}
+
+setInterval(()=>{
+const h=document.createElement('div');
+h.className='heart';
+h.innerHTML='🤍';
+h.style.left=Math.random()*100+'vw';
+h.style.fontSize=(15+Math.random()*20)+'px';
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},350);
+</script>
+</body>
+</html>
